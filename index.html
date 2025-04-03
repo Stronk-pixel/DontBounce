@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu des pièces</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Jeu des pièces</h1> <!-- Titre -->
+    <p>Contrôlez le carré bleu et collectez les pièces sans toucher les bords! Utilisez les touches W, A, S et D pour vous déplacer.</p> <!-- Texte explicatif -->
+    <p>Le carré grandit quand vous ramassez les pièces. Le but est d'arriver à la taille maximum.</p>
+    <p></p>
+    <div id="container">
+        <div id="controls">
+            <div id="coinCounter">Pièces récoltées : 0</div>
+            <button id="resetGame">Restart</button>
+            <h3>DEBUG</h3>
+            <button id="increaseSize">Augmenter la taille</button>
+            <button id="decreaseSize">Diminuer la taille</button>
+            <button id="increaseBounce">Augmenter Rebond</button>
+        </div>
+
+        <canvas id="gameCanvas" width="800" height="800"></canvas> <!-- Canvas -->
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    display: flex; /* Utiliser Flexbox */
+    flex-direction: column;
+    align-items: center; /* Centrer les éléments horizontalement */
+    height: 100vh;
+    background-color: #87CEEB;
+}
+
+h1 {
+    margin: 10px; /* Un léger espacement autour du titre */
+}
+
+p {
+    margin: 10px; /* Un léger espacement autour du texte explicatif */
+    text-align: center; /* Centrer le texte */
+}
+
+#container {
+    display: flex; /* Utiliser flexbox pour aligner les contrôles à côté du canvas */
+}
+
+#controls {
+    display: flex;
+    flex-direction: column; /* Aligner les éléments en colonne */
+    gap: 10px; /* Espacement entre les boutons */
+    margin-right: 20px; /* Espace à droite pour séparer le canvas */
+}
+
+canvas {
+    border: 2px solid #000;
+}
+
+button {
+    width: 200px; /* Taille cohérente pour les boutons */
+}
