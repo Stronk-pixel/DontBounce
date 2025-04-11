@@ -1,36 +1,212 @@
 body {
     margin: 0;
-    display: flex; /* Utiliser Flexbox */
-    flex-direction: column;
-    align-items: center; /* Centrer les éléments horizontalement */
-    height: 100vh;
-    background-color: #87CEEB;
-}
-
-h1 {
-    margin: 10px; /* Un léger espacement autour du titre */
-}
-
-p {
-    margin: 10px; /* Un léger espacement autour du texte explicatif */
-    text-align: center; /* Centrer le texte */
-}
-
-#container {
-    display: flex; /* Utiliser flexbox pour aligner les contrôles à côté du canvas */
-}
-
-#controls {
-    display: flex;
-    flex-direction: column; /* Aligner les éléments en colonne */
-    gap: 10px; /* Espacement entre les boutons */
-    margin-right: 20px; /* Espace à droite pour séparer le canvas */
+    padding: 0;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    font-family: 'Orbitron', sans-serif;
+    color: #00eaff;
+    overflow: hidden;
 }
 
 canvas {
-    border: 2px solid #000;
+    display: block;
+    margin: 0 auto;
+    border: 3px solid #ff00cc;
+    box-shadow: 0 0 20px #ff00cc, 0 0 40px #00eaff;
+    background-color: black;
 }
 
 button {
-    width: 200px; /* Taille cohérente pour les boutons */
+    background-color: transparent;
+    border: 2px solid #00eaff;
+    color: #00eaff;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #00eaff;
 }
+
+#leftButtons, #rightButtons {
+    display: none;
+  }
+
+button:hover {
+    background-color: #00eaff;
+    color: black;
+    box-shadow: 0 0 20px #00eaff, 0 0 40px #ff00cc;
+}
+
+#endScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #0f0c29, #302b63, #24243e);
+    color: #00eaff;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    text-align: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+#endScreen h2 {
+    font-size: 3rem;
+    text-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc;
+}
+
+#endScreen button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-family: 'Orbitron', sans-serif;
+    background: #ff00cc;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff00cc;
+    transition: all 0.2s ease;
+}
+
+#endScreen button:hover {
+    background: #ff66d8;
+    box-shadow: 0 0 25px #ff00cc;
+}
+
+#startScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #0f0c29, #302b63, #24243e);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+}
+
+#startBtn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-family: 'Orbitron', sans-serif;
+    background: #ff00cc;
+    border: none;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc;
+    transition: transform 0.2s;
+}
+
+#topButtons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    background: #220033;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00ffff;
+    transition: all 0.3s ease;
+  }
+  
+#topButtons button:hover {
+    background-color: #330044;
+    box-shadow: 0 0 15px #00ffff, 0 0 25px #ff00cc;
+  }
+
+#topGameButtons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+#topGameButtons button {
+    background-color: #220033;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    padding: 8px 14px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 0 10px #00ffff;
+  }
+  
+#topGameButtons button:hover {
+    background-color: #330044;
+    box-shadow: 0 0 15px #00ffff, 0 0 25px #ff00cc;
+    transform: scale(1.05);
+  }
+
+#leftButtons, #rightButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 50px; /* Ajuste selon la hauteur du haut du canvas */
+}
+
+#gameCanvas {
+    width: 80vmin;
+    height: 80vmin;
+    max-width: 800px;
+    max-height: 800px;
+    aspect-ratio: 1 / 1;
+    border: 3px solid #ff00cc;
+    box-shadow: 0 0 20px #ff00cc, 0 0 40px #00eaff;
+    background-color: black;
+  }
+
+  #mainLayout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  
+  #leftButtons,
+  #rightButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 0;
+    align-items: flex-start;
+    height: 80vmin; /* même que le canvas */
+    max-height: 800px;
+    box-sizing: border-box;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 900px) {
+    #mainLayout {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #leftButtons, #rightButtons {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      height: auto;
+    }
+  }

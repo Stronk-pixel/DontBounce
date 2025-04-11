@@ -1,31 +1,152 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu des pièces</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jeu des pièces</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(180deg, #0f0026, #1a002f);
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 20px;
+      color: #ff00ff;
+      text-shadow: 0 0 8px #ff00ff;
+    }
+
+    p {
+      margin: 10px auto;
+      max-width: 700px;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+
+    #mainLayout {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 20px;
+      gap: 40px;
+    }
+
+    #leftButtons, #rightButtons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #centerColumn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #levelDisplay, #coinCounter {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #00ffff;
+      text-shadow: 0 0 6px #00ffff;
+    }
+
+    canvas {
+      border: 3px solid #ff00ff;
+      box-shadow: 0 0 15px #ff00ff;
+      margin-bottom: 20px;
+    }
+
+    
+
+    button {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #220033;
+      color: #00ffff;
+      border: 2px solid #00ffff;
+      padding: 8px 14px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #330044;
+      box-shadow: 0 0 10px #00ffff;
+      transform: scale(1.05);
+    }
+
+    #restartContainer {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Jeu des pièces</h1> <!-- Titre -->
-    <p>Contrôlez le carré bleu et collectez les pièces sans toucher les bords! Utilisez les touches W, A, S et D pour vous déplacer.</p> <!-- Texte explicatif -->
-    <p>Le carré grandit quand vous ramassez les pièces. Le but est d'arriver à la taille maximum.</p>
-    <p></p>
-    <div id="container">
-        <div id="controls">
-            <div id="levelDisplay">Niveau : 1</div>
-            <div id="coinCounter">Pièces récoltées : 0</div>
-            <button id="resetGame">Restart</button>
-            <h3>DEBUG</h3>
-            <button id="increaseSize">Augmenter la taille</button>
-            <button id="decreaseSize">Diminuer la taille</button>
-            <button id="increaseBounce">Augmenter Rebond</button>
-            <button id="toggleMoveCoins">Activer le Mouvement des Pièces</button>
-        </div>
 
-        <canvas id="gameCanvas" width="800" height="800"></canvas> <!-- Canvas -->
-    </div>
+  <h1>Don't Bounce</h1>
+  <div id="mainLayout">
     
+    <!-- Colonne gauche : Cheats -->
+    <div id="leftButtons">
+      <h3>Cheats</h3>
+      <button id="increaseLevel">+1 Niveau</button>
+      <button id="add50Coins">+50 pièces</button>
+      <button id="add100Coins">+100 pièces</button>
+      <button id="increaseSize">Taille +</button>
+      <button id="decreaseSize">Taille -</button>
+    </div>
+
+    <!-- Colonne centrale : Canvas et infos -->
+    <div id="centerColumn">
+        <div id="topGameButtons">
+          <button id="resetGame">Restart</button>
+          <button id="toggleMusic">Couper la musique</button>
+          <button id="toggleCheats">Je veux tricher</button>
+        </div>
+      
+        <div id="levelDisplay">Niveau : 1</div>
+        <div id="coinCounter">Pièces récoltées : 0</div>
+
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="endScreen" style="display: none;">
+        <h2>🔥 Tu as vaincu le boss ! 🔥</h2>
+        <p>Tu as récupéré toutes les pièces et survécu au vortex final.</p>
+        <button id="playAgainBtn">Rejouer</button>
+    </div>
+    </div>
+        <!-- Colonne droite : Skip levels -->
+        <div id="rightButtons">
+        <h3>Skip to level :</h3>
+        <button onclick="jumpToLevel(5)">Niveau 5</button>
+        <button onclick="jumpToLevel(10)">Niveau 10</button>
+        <button onclick="jumpToLevel(15)">Niveau 15</button>
+        <button onclick="jumpToLevel(20)">Niveau 20</button>
+        <button onclick="jumpToLevel(25)">Niveau 25</button>
+        <button onclick="jumpToLevel(30)">Niveau 30</button>
+        <button onclick="jumpToLevel(35)">Niveau 35</button>
+        <button onclick="jumpToLevel(40)">Niveau 40</button>
+        <button onclick="jumpToLevel(45)">Niveau 45</button>
+        <button onclick="jumpToLevel(50)">Niveau 50</button>
+        </div>
+    </div>
+
+  
+    <div id="startScreen">
+        <h1>Don't Bounce</h1>
+        <p>Collecte les pièces sans toucher les bords !</p>
+        <p>La difficulté augmente tous les 5 niveaux.</p>
+        <p><strong>W, A, S, D</strong> pour te déplacer</p>
+        <p><strong>Espace</strong> pour mettre en pause</p>
+        <button id="startBtn">Démarrer le jeu</button>
+    </div>
+
     <script src="main.js"></script>
 </body>
 </html>
