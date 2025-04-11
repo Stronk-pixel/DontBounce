@@ -11,12 +11,16 @@ soundHit.volume = 0.1;
 let isMusicPlaying = false;
 
 function resizeCanvas() {
-    const size = Math.min(window.innerWidth, window.innerHeight, 600);
+    const margin = 160; // espace pour les boutons et le titre
+    const availableHeight = window.innerHeight - margin;
+    const availableWidth = window.innerWidth - 100; // un peu de marge latérale
+  
+    const size = Math.min(availableWidth, availableHeight);
     canvas.width = size;
     canvas.height = size;
   }
   window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
+  resizeCanvas(); 
 
 // Masquer les cheats au démarrage
 document.getElementById('leftButtons').style.display = 'none';
